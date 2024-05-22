@@ -15,3 +15,11 @@ services:
             - ../resources/:/resources
         # This keeps the devcontainer running.
         entrypoint: [ "tail", "-f", "/dev/null" ]
+
+    redis-cache-redis:
+        image: redis:${REDIS_VERSION}
+        container_name: redis-cache-redis
+        ports:
+            - "6379:6379"
+        volumes:
+            - $PWD/resources/cache/redis:/data
