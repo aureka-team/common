@@ -22,6 +22,9 @@ class RedisCache:
             db=redis_db,
         )
 
+    def __del__(self) -> None:
+        self.redis_client.close()
+
     def save(self, obj: Any, cache_key: str, overwrite: bool = False) -> None:
         if not overwrite:
             if self.redis_client.exists(cache_key):
