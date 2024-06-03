@@ -3,7 +3,7 @@ import shutil
 from pathlib import Path
 
 
-def create_path(path: str, overwrite: bool = False):
+def create_path(path: str, overwrite: bool = False) -> None:
     if overwrite:
         shutil.rmtree(path, ignore_errors=True)
 

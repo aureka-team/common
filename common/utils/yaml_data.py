@@ -7,6 +7,6 @@ def load_yaml(file_path: str) -> dict:
         return content
 
 
-def save_yaml(dict_data: dict, file_path: str):
+def save_yaml(dict_data: dict, file_path: str) -> None:
     with open(file_path, "w") as f:
         f.write(yaml.dump(dict_data))

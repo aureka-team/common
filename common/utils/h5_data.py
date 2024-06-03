@@ -2,11 +2,10 @@ import os
 import h5py
 
 import numpy as np
-
 from typing import Optional
 
 
-def save_h5(save_path: str, cache_key: str, vectors: np.ndarray):
+def save_h5(save_path: str, cache_key: str, vectors: np.ndarray) -> None:
     out_file = f"{save_path}/{cache_key}.h5"
     with h5py.File(out_file, "w") as h5f:
         h5f.create_dataset("vectors", data=vectors)
