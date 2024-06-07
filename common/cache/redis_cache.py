@@ -1,3 +1,4 @@
+import os
 import dill
 
 from redis import Redis
@@ -6,15 +7,20 @@ from typing import Any, Optional
 from common.logger import get_logger
 
 
+REDIS_HOST = os.getenv("REDIS_HOST", "common-redis")
+REDIS_PORT = int(os.getenv("REDIS_PORT", "6379"))
+REDIS_DB = int(os.getenv("REDIS_DB", "0"))
+
+
 logger = get_logger(__name__)
 
 
 class RedisCache:
     def __init__(
         self,
-        redis_host: str = "localhost",
-        redis_port: str = 6379,
-        redis_db: str = 0,
+        redis_host: str = REDIS_HOST,
+        redis_port: str = REDIS_PORT,
+        redis_db: str = REDIS_DB,
     ):
         self.redis_client = Redis(
             host=redis_host,

@@ -1,6 +1,5 @@
 services:
     common-devcontainer:
-        network_mode: host
         image: common-devcontainer
         container_name: common-devcontainer
         build:
@@ -15,11 +14,17 @@ services:
             - ../resources/:/resources
         # This keeps the devcontainer running.
         entrypoint: [ "tail", "-f", "/dev/null" ]
+        networks:
+            - common-network
 
-    redis-cache-redis:
+    common-redis:
         image: redis:${REDIS_VERSION}
-        container_name: redis-cache-redis
-        ports:
-            - "6379:6379"
+        container_name: common-redis
         volumes:
             - $PWD/resources/cache/redis:/data
+        networks:
+            - common-network
+
+networks:
+    common-network:
+        driver: bridge

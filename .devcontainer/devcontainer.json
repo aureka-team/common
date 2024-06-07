@@ -2,9 +2,6 @@
 	"name": "common",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "common-devcontainer",
-	"runServices": [
-		"common-devcontainer"
-	],
 	"workspaceFolder": "/workspace",
 	"customizations": {
 		"vscode": {
