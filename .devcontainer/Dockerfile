@@ -13,7 +13,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     unzip \
     git-core \
     openssh-client \
-    iputils-ping \
+    inetutils-ping \
     telnet \
     python${PYTHON_VERSION} \
     python${PYTHON_VERSION}-dev \
