@@ -1,8 +1,8 @@
 rich>=13.7.1
 tqdm>=4.66.4
-more-itertools>=10.2.0
+more-itertools>=10.3.0
 h5py>=3.11.0
 PyYAML>=6.0.1
-redis>=5.0.5
+redis>=5.0.6
 dill>=0.3.8
 joblib>=1.4.2
