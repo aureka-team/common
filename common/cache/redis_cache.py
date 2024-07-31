@@ -1,7 +1,7 @@
 import os
 import dill
 
-from redis import Redis
+from redis import Redis, ConnectionPool
 from typing import Any, Optional
 
 from common.logger import get_logger
@@ -21,12 +21,16 @@ class RedisCache:
         redis_host: str = REDIS_HOST,
         redis_port: str = REDIS_PORT,
         redis_db: str = REDIS_DB,
+        max_connections: int = 128,
     ):
-        self.redis_client = Redis(
+        connection_pool = ConnectionPool(
             host=redis_host,
             port=redis_port,
             db=redis_db,
+            max_connections=max_connections,
         )
+
+        self.redis_client = Redis(connection_pool=connection_pool)
 
     def __del__(self) -> None:
         self.redis_client.close()
