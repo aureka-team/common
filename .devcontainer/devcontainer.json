@@ -25,7 +25,9 @@
 				},
 				"editor.formatOnSave": true,
 				"notebook.formatOnSave.enabled": true,
-				"notebook.output.scrolling": true
+				"notebook.output.scrolling": true,
+				"ruff.configuration": "ruff.toml",
+				"ruff.lineLength": 80
 			},
 			"extensions": [
 				"ms-python.python",
@@ -35,7 +37,8 @@
 				"ms-azuretools.vscode-docker",
 				"ms-toolsai.jupyter",
 				"redhat.vscode-yaml",
-				"tamasfe.even-better-toml"
+				"tamasfe.even-better-toml",
+				"christian-kohler.path-intellisense"
 			]
 		}
 	},

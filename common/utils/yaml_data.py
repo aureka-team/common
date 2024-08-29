@@ -7,6 +7,15 @@ def load_yaml(file_path: str) -> dict:
         return content
 
 
-def save_yaml(dict_data: dict, file_path: str) -> None:
+def save_yaml(
+    dict_data: dict,
+    file_path: str,
+    indent: int = 4,
+) -> None:
     with open(file_path, "w") as f:
-        f.write(yaml.dump(dict_data))
+        f.write(
+            yaml.dump(
+                dict_data,
+                indent=indent,
+            )
+        )

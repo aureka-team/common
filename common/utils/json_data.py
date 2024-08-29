@@ -16,9 +16,13 @@ def get_pretty(
     )
 
 
-def save_json(obj: dict | list[dict], file_path: str) -> None:
+def save_json(
+    obj: dict | list[dict],
+    file_path: str,
+    indent: int = 4,
+) -> None:
     with open(file_path, "w") as f:
-        f.write(get_pretty(obj))
+        f.write(get_pretty(obj=obj, indent=indent))
 
 
 def load_json(json_file_path: str) -> dict | list[dict]:
