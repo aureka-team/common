@@ -1,6 +1,6 @@
-rich>=13.8.0
+rich>=13.8.1
 tqdm>=4.66.5
-more-itertools>=10.4.0
+more-itertools>=10.5.0
 h5py>=3.11.0
 PyYAML>=6.0.2
 redis>=5.0.8
