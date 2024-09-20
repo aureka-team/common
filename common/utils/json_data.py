@@ -1,7 +1,7 @@
 import json
 
 from itertools import groupby
-from typing import Iterator, Iterable, Optional
+from typing import Iterator, Iterable
 
 
 def get_pretty(
@@ -39,7 +39,7 @@ def get_unique(dict_list: list[dict]) -> Iterator[dict]:
 def group_by_key(
     dict_iter: Iterable[dict],
     group_key: str,
-    sort_key: Optional[str] = None,
+    sort_key: str | None = None,
 ) -> Iterator[list[dict]]:
     if sort_key is not None:
         dict_iter = sorted(dict_iter, key=lambda x: x[sort_key])

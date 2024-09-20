@@ -12,9 +12,6 @@ RUN --mount=type=cache,target=/var/cache/apt \
     htop \
     unzip \
     git-core \
-    openssh-client \
-    inetutils-ping \
-    telnet \
     python${PYTHON_VERSION} \
     python${PYTHON_VERSION}-dev \
     python3-setuptools \

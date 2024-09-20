@@ -1,8 +1,8 @@
 import os
 import dill
 
+from typing import Any
 from redis import Redis, ConnectionPool
-from typing import Any, Optional
 
 from common.logger import get_logger
 
@@ -51,7 +51,7 @@ class RedisCache:
         logger.debug(f"saving in cache: {objs}")
         self.redis_client.mset({k: dill.dumps(v) for k, v in objs.items()})
 
-    def load(self, cache_key: str) -> Optional[Any]:
+    def load(self, cache_key: str) -> Any | None:
         if not self.redis_client.exists(cache_key):
             return
 
