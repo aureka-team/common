@@ -35,7 +35,14 @@ class RedisCache:
     def __del__(self) -> None:
         self.redis_client.close()
 
-    def save(self, obj: Any, cache_key: str, overwrite: bool = False) -> None:
+    def save(
+        self,
+        obj: Any,
+        cache_key: str,
+        overwrite: bool = False,
+        # NOTE: Expiration time in seconds.
+        expiration: int | None = None,
+    ) -> None:
         if not overwrite:
             if self.redis_client.exists(cache_key):
                 logger.warning(f"cache_key: {cache_key} already exists")
@@ -45,6 +52,7 @@ class RedisCache:
         self.redis_client.set(
             name=cache_key,
             value=dill.dumps(obj),
+            ex=expiration,
         )
 
     def msave(self, objs: dict[str, Any]) -> None:
