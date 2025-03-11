@@ -65,11 +65,11 @@ class RedisCache:
 
         logger.debug(f"loading from cache: {cache_key}")
         obj = self.redis_client.get(cache_key)
-        obj = dill.loads(obj)
 
-        return obj
+        return dill.loads(obj)
 
     def mload(self, cache_keys: list[str]) -> list[Any]:
         logger.debug(f"loading from cache: {cache_keys}")
         objs = self.redis_client.mget(cache_keys)
+
         return [dill.loads(obj) if obj is not None else obj for obj in objs]
