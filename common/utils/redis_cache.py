@@ -1,8 +1,7 @@
+import inspect
 import functools
 
 from joblib import hash
-
-
 from common.cache import RedisCache
 
 
@@ -13,9 +12,9 @@ def cache(
 ):
     def decorator(func):
         @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            cache_key = hash(
-                obj=(
+        def get_cache_key(args, kwargs):
+            return hash(
+                (
                     func.__module__,
                     func.__qualname__,
                     args,
@@ -23,20 +22,38 @@ def cache(
                 )
             )
 
+        async def async_wrapper(*args, **kwargs):
+            cache_key = get_cache_key(args=args, kwargs=kwargs)
+            cached = redis_cache.load(cache_key=cache_key)
+            if cached is not None:
+                return cached
+
+            result = await func(*args, **kwargs)
+            redis_cache.save(
+                result,
+                cache_key,
+                overwrite=overwrite,
+                expiration=expiration,
+            )
+            return result
+
+        def sync_wrapper(*args, **kwargs):
+            cache_key = get_cache_key(args=args, kwargs=kwargs)
             cached = redis_cache.load(cache_key=cache_key)
             if cached is not None:
                 return cached
 
             result = func(*args, **kwargs)
             redis_cache.save(
-                obj=result,
-                cache_key=cache_key,
+                result,
+                cache_key,
                 overwrite=overwrite,
                 expiration=expiration,
             )
-
             return result
 
-        return wrapper
+        return (
+            async_wrapper if inspect.iscoroutinefunction(func) else sync_wrapper
+        )
 
     return decorator
