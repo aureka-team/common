@@ -1,24 +1,27 @@
 services:
     common-devcontainer:
-        network_mode: host
         image: common-devcontainer
         container_name: common-devcontainer
         build:
             context: ..
             dockerfile: .devcontainer/Dockerfile
-            args:
-                - PYTHON_VERSION
-                - UV_VERSION
-                - DEVCONTAINER_USER
         volumes:
             - ..:/workspace:cached
             - ../resources/:/resources
         # This keeps the devcontainer running.
         entrypoint: ["tail", "-f", "/dev/null"]
+        networks:
+            - common
 
     common-redis:
-        network_mode: host
-        image: redis:${REDIS_VERSION}
+        image: redis:8.0.1
         container_name: common-redis
         volumes:
             - $PWD/resources/cache/redis:/data
+        networks:
+            - common
+
+networks:
+    common:
+        name: common
+        driver: bridge
