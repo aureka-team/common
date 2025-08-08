@@ -14,7 +14,7 @@ services:
             - common
 
     common-redis:
-        image: redis:8.0.1
+        image: redis:8.0.2
         container_name: common-redis
         volumes:
             - $PWD/resources/cache/redis:/data
