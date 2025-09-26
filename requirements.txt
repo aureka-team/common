@@ -1,9 +1,10 @@
 rich>=14.1.0
 tqdm>=4.67.1
-more-itertools>=10.7.0
-PyYAML>=6.0.2
+more-itertools>=10.8.0
+PyYAML>=6.0.3
 redis>=6.4.0
 dill>=0.4.0
-joblib>=1.5.1
-pydantic>=2.11.7
+joblib>=1.5.2
+pydantic>=2.11.9
 pooch>=1.8.2
+networkx>=3.5

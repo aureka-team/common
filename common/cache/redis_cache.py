@@ -19,8 +19,8 @@ class RedisCache:
     def __init__(
         self,
         redis_host: str = REDIS_HOST,
-        redis_port: str = REDIS_PORT,
-        redis_db: str = REDIS_DB,
+        redis_port: int = REDIS_PORT,
+        redis_db: int = REDIS_DB,
         max_connections: int = 128,
     ):
         connection_pool = ConnectionPool(
@@ -72,4 +72,4 @@ class RedisCache:
         logger.debug(f"loading from cache: {cache_keys}")
         objs = self.redis_client.mget(cache_keys)
 
-        return [dill.loads(obj) if obj is not None else obj for obj in objs]
+        return [dill.loads(obj) if obj is not None else obj for obj in objs]  # type: ignore

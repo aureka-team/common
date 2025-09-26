@@ -24,14 +24,14 @@ def cache(
 
         async def async_wrapper(*args, **kwargs):
             cache_key = get_cache_key(args=args, kwargs=kwargs)
-            cached = redis_cache.load(cache_key=cache_key)
+            cached = redis_cache.load(cache_key=cache_key)  # type: ignore
             if cached is not None:
                 return cached
 
             result = await func(*args, **kwargs)
             redis_cache.save(
                 result,
-                cache_key,
+                cache_key,  # type: ignore
                 overwrite=overwrite,
                 expiration=expiration,
             )
@@ -39,14 +39,14 @@ def cache(
 
         def sync_wrapper(*args, **kwargs):
             cache_key = get_cache_key(args=args, kwargs=kwargs)
-            cached = redis_cache.load(cache_key=cache_key)
+            cached = redis_cache.load(cache_key=cache_key)  # type: ignore
             if cached is not None:
                 return cached
 
             result = func(*args, **kwargs)
             redis_cache.save(
                 result,
-                cache_key,
+                cache_key,  # type: ignore
                 overwrite=overwrite,
                 expiration=expiration,
             )

@@ -14,7 +14,7 @@ def save_yaml(
 ) -> None:
     with open(file_path, "w") as f:
         f.write(
-            yaml.dump(
+            yaml.dump(  # type: ignore
                 dict_data,
                 indent=indent,
             )
