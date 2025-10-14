@@ -1,5 +1,6 @@
 import os
 import dill
+import joblib
 import inspect
 import functools
 
@@ -86,7 +87,7 @@ def cache(
     def decorator(func):
         @functools.wraps(func)
         def get_cache_key(args, kwargs):
-            return hash(
+            return joblib.hash(
                 (
                     func.__module__,
                     func.__qualname__,
